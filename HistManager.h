@@ -21,10 +21,7 @@ class HistManager
     ~HistManager();
 
 
-    // EP
-    //void InitEP();
-    //void WriteEP();
-
+    // QAPID
     void InitQAPID();
     void WriteQAPID();
     // Event level QA
@@ -38,6 +35,9 @@ class HistManager
     void FillTrackTof(StPicoDst* pico, StPicoTrack *track);
     void FillTrackCut(Int_t CutID); // 
     // PID 
+    void FillTriton(StPicoDst *pico, StPicoTrack *PicoTrack, Double_t y_mid);  
+    void FillDeuteron(StPicoDst *pico, StPicoTrack *PicoTrack, Double_t y_mid);  
+    void FillProtonETof(StPicoTrack *track, Double_t y_mid); // ETof test
     void FillProton(StPicoDst *pico, StPicoTrack *PicoTrack, Double_t y_mid);  
     void FillKaon(StPicoDst *pico, StPicoTrack *PicoTrack, Double_t y_mid); 
     void FillPion(StPicoDst *pico, StPicoTrack *PicoTrack, Double_t y_mid); 
@@ -80,6 +80,7 @@ class HistManager
     TH1D*                h_mult_kp;
     TH1D*                h_mult_km;
     TH1D*                h_mult_pr;
+    TH1D*                h_mult_pbar;
     //TH1D*                h_mult_de;
     //TH1D*                h_mult_tr;
 
@@ -88,64 +89,74 @@ class HistManager
     TH1D*                h_pT_kp;
     TH1D*                h_pT_km;
     TH1D*                h_pT_pr;
-    //TH1D*                h_pT_de;
-    //TH1D*                h_pT_tr;
+    TH1D*                h_pT_pbar;
+    TH1D*                h_pT_de;
+    TH1D*                h_pT_tr;
 
     TH1D*                h_dndy_pp;
     TH1D*                h_dndy_pm;
     TH1D*                h_dndy_kp;
     TH1D*                h_dndy_km;
     TH1D*                h_dndy_pr;
-    //TH1D*                h_dndy_de;
-    //TH1D*                h_dndy_tr;
+    TH1D*                h_dndy_pbar;
+    TH1D*                h_dndy_de;
+    TH1D*                h_dndy_tr;
 
     TH1D*                h_eta_pp;
     TH1D*                h_eta_pm;
     TH1D*                h_eta_kp;
     TH1D*                h_eta_km;
     TH1D*                h_eta_pr;
-    //TH1D*                h_eta_de;
-    //TH1D*                h_eta_tr;
+    TH1D*                h_eta_pbar;
+    TH1D*                h_eta_de;
+    TH1D*                h_eta_tr;
 
     TH1D*                h_phi_pp;
     TH1D*                h_phi_pm;
     TH1D*                h_phi_kp;
     TH1D*                h_phi_km;
     TH1D*                h_phi_pr;
-    //TH1D*                h_phi_de;
-    //TH1D*                h_phi_tr;
+    TH1D*                h_phi_pbar;
+    TH1D*                h_phi_de;
+    TH1D*                h_phi_tr;
 
     TH2D*                h2_pT_vs_yCM_pp;
     TH2D*                h2_pT_vs_yCM_pm;
     TH2D*                h2_pT_vs_yCM_kp;
     TH2D*                h2_pT_vs_yCM_km;
     TH2D*                h2_pT_vs_yCM_pr;
-    //TH2D*                h2_pT_vs_yCM_de;
-    //TH2D*                h2_pT_vs_yCM_tr;
+    TH2D*                h2_pT_vs_yCM_pr_ETof;
+    TH2D*                h2_pT_vs_yCM_pbar;
+    TH2D*                h2_pT_vs_yCM_pbar_ETof;
+    TH2D*                h2_pT_vs_yCM_de;
+    TH2D*                h2_pT_vs_yCM_tr;
 
     TH2D*                h2_dEdx_vs_qp_pp;
     TH2D*                h2_dEdx_vs_qp_pm;
     TH2D*                h2_dEdx_vs_qp_kp;
     TH2D*                h2_dEdx_vs_qp_km;
     TH2D*                h2_dEdx_vs_qp_pr;
-    //TH2D*                h2_dEdx_vs_qp_de;
-    //TH2D*                h2_dEdx_vs_qp_tr;
+    TH2D*                h2_dEdx_vs_qp_pbar;
+    TH2D*                h2_dEdx_vs_qp_de;
+    TH2D*                h2_dEdx_vs_qp_tr;
 
+    TH2D*                h2_beta_vs_qp_pp;
     TH2D*                h2_beta_vs_qp_pm;
     TH2D*                h2_beta_vs_qp_kp;
     TH2D*                h2_beta_vs_qp_km;
     TH2D*                h2_beta_vs_qp_pr;
-    TH2D*                h2_beta_vs_qp_pp;
-    //TH2D*                h2_beta_vs_qp_de;
-    //TH2D*                h2_beta_vs_qp_tr;
+    TH2D*                h2_beta_vs_qp_pbar;
+    TH2D*                h2_beta_vs_qp_de;
+    TH2D*                h2_beta_vs_qp_tr;
 
     TH2D*                h2_m2_vs_qp_pp;
     TH2D*                h2_m2_vs_qp_pm;
     TH2D*                h2_m2_vs_qp_kp;
     TH2D*                h2_m2_vs_qp_km;
     TH2D*                h2_m2_vs_qp_pr;
-    //TH2D*                h2_m2_vs_qp_de;
-    //TH2D*                h2_m2_vs_qp_tr;
+    TH2D*                h2_m2_vs_qp_pbar;
+    TH2D*                h2_m2_vs_qp_de;
+    TH2D*                h2_m2_vs_qp_tr;
 
 
     static TString mVStr[2];
